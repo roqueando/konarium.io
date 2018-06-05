@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Konarium.io</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	
+	<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #673AB7">
+			
+		<a href="#" class="navbar-brand" style="color: #fff">Konarium <i style="font-size: 14px">a Emergency Broadcast Sonar</i></a>
+		
+		<div class="my-2 my-lg-0 ml-auto">
+			<a href="#" class="nav-item" id="setting" data-toggle="modal" data-target="#myModal">
+
+				<img src="img/icons/settings.svg" style="width: 40px; height: auto;">
+				<span style="color: #000; text-decoration: none; text-decoration-line: none">Settings</span>
+			</a>
+		</div>
+
+	</nav>
+	
+
+	<div class="modal fade right" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+  		<div class="modal-dialog modal-side modal-top-right" role="document">
+  			<div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="myModalLabel">My Settings</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                ...
+	            </div>
+        	</div>
+		</div>
+	</div>
+
+
+	<div  id="above-content"></div>
+	<div id="snackbar"></div>
+	<div class="container">
+		
+		<div style="border: 5px solid transparent"></div>
+		
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs nav-justified " role="tablist" style="border-radius: 5px; background-color: #3F51B5">
+		    <li class="nav-item">
+		        <a class="nav-link active" data-toggle="tab" href="#panel5" role="tab" >
+		       		<button class="btn btn-primary btn-lg btn-block" style="color: #fff">publish a notice</button>
+		   		</a>
+		    </li>
+		    <li class="nav-item">
+		        <a class="nav-link" data-toggle="tab" href="#panel6" role="tab" >
+			         <button class="btn btn-primary btn-lg btn-block" style="color: #fff">Follow a Konarium</button>
+			     </a>
+		    </li>
+		</ul>
+    <!-- Nav tabs -->
+    <!-- Tab panels -->
+
+		<div class="tab-content">
+		    <!--Panel 1-->
+		    <div class="tab-pane fade in show active" id="panel5" role="tabpanel">
+		        <!-- Nav tabs -->
+		        <br>
+		        <div class="row" id="k-publish" style="padding: 10px; ">
+					<div id="form-area" class="container card" style="padding: 20px; ">
+							
+							<form role="form" id="publish-form">
+								
+								<div class="row">
+									<div class="col ">
+										<input type="text" id="n-title" placeholder="Title" class="form-control">
+									</div>
+
+									<div class="col ">
+										<label for='media' id="label-media">
+											<img src="img/icons/camera.png" style="width: 50px; height: auto;">
+											<span id="only-lg-label"> <i>Pick a image</i> </span>
+										</label>
+				           				<input type="file" accept='image/*' id="media"  style="display: none">
+				           			</div>
+			           			</div>
+
+			           				<textarea class="form-control" id="n-content" placeholder="Tell a notice"></textarea>
+										<br>
+										<br>
+			           				<button class="btn btn-block btn-primary">publish</button>
+							</form>
+
+					</div>
+				</div>
+		    </div>
+		    <!--/.Panel 1-->
+
+		    <!--Panel 2-->
+		    <div class="tab-pane fade" id="panel6" role="tabpanel">
+		        <br>
+					<input type="text" id="k-person" placeholder="Search a Konar by Name Person@Hex (Jhonny Doe@123abc) and hit enter" class="form-control" style="text-align: center">
+		    </div>
+		    <!--/.Panel 2-->
+		</div>
+
+	<!-- Tab panels -->
+		
+		<div id="areas" >
+			<div style="border: 5px solid transparent"></div>
+
+			
+
+			
+		</div>
+
+		<div id="notices">
+			<div style="border: 20px solid transparent"></div>
+			<div class="card">
+
+			  <!-- Card content -->
+			  <div class="card-body">
+
+			    <!-- Title -->
+			    <h4 class="card-title">Some News!</h4>
+			    <h5>by John Park <i>at 7:35 PM</i></h5>
+			    <!-- Text -->
+			    <p class="card-text">
+			    	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			    	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			    	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			    	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			    	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			    	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			    </p>
+			    <!-- Button -->
+			    <a href="#" class="btn btn-primary">reply</a> <span style="padding: 10px; background-color: #3F51B5; color: #fff; border-radius: 3px">19 replies</span>
+
+			  </div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-material-design.min.js"></script>
+	<script type="text/javascript" src="js/Tools.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "konarium.io",
+  "version": "0.0.3",
+  "description": "A Emergency Broadcast Newspaper decentralized",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vítor Roque",
+  "license": "MIT",
+  "dependencies": {
+    "dat-node": "^3.5.9",
+    "express": "^4.16.3",
+    "fs-extra": "^6.0.1",
+    "lowdb": "^1.0.0",
+    "node-watch": "^0.5.8"
+  }
+}
