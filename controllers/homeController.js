@@ -1,4 +1,4 @@
-const { ConfigDB, NoticesDB, Post } = require('../Handle');
+const { Post } = require('../Handle');
 const PostHandler = new Post();
 
 /**
