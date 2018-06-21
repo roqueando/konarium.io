@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
-const Handle = require('./Handle');
 const bp = require('body-parser');
-const path = require('path');
 const { ConfigDB, NoticesDB } = require('./Handle');
 
 /**

@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router(); // Initialize the Express Router
 
 // get all I need from Handle file
-const { ConfigDB, DatHandle, NoticesDB } = require('../Handle');
+const { ConfigDB, DatHandle } = require('../Handle');
 
 /**
  * --------------------------
@@ -37,11 +37,8 @@ Dat.sync();
  */
 router.get("/",  (req, res) => {
 
-
-	let id = ConfigDB.get('id').value();
-	let user = ConfigDB.get('user.name').value();
+	let id = Dat.getMyHash();
 	let me = ConfigDB.get("user").value();
-	
 
 	let konaries = ConfigDB.get('konaries').value();
 		
@@ -56,7 +53,10 @@ router.get("/",  (req, res) => {
 	
 		
 	res.send({
-		user: me
+
+		me,
+		id
+
 	});
 
 });

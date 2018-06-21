@@ -72,8 +72,7 @@ const NoticesDB = LowDB(Notices);
  */
 
 ConfigDB.defaults({
-
-	id: "",
+	
 	user: {},
 	konaries: []
 
@@ -100,6 +99,7 @@ class DatHandle {
 
 	constructor(src) {
 
+		this.key;
 
 		Dat(src, (err, dat) => {
 	        if(err) throw err;    
@@ -111,14 +111,12 @@ class DatHandle {
   			watcher.on('change', (event, name) => {
   				console.log("The file " + name + " has changed");
 
-  				let file = filesys.readFileSync(name, 'utf-8');
-
   				dat.importFiles();
   			})
 	        dat.live;
 	        dat.joinNetwork();
-	        const hex_key = dat.key.toString('hex');
-	        console.log(hex_key);
+	        this.key = dat.key.toString('hex');
+	        console.log(this.key);
 
 	    });
 
@@ -144,8 +142,6 @@ class DatHandle {
 	            if(json.includes('.json')) {
 	   
 	                let konar = filesys.readJsonSync(`./Konaries/${folder}/notices.json`, 'utf-8');
-	                let myKonars = NoticesDB.get('konars').value();
-	                let myNotices = NoticesDB.get('notices').value();
 	                let mykonarid = NoticesDB.get('konars').map('id').value();
 	             	
 	             	for(var n in konar.notices) {
@@ -167,7 +163,6 @@ class DatHandle {
 	                	
 	                    if(event == "update") {
 	                        console.log("file: "+name+" updated");
-	                        let str = folder.replace('_', ' ');
 	                        
 	                    }
 
@@ -226,7 +221,10 @@ class DatHandle {
 
 	}
 	
+	getMyHash() {
 
+		return this.key;
+	}
 }
 
 
@@ -369,7 +367,27 @@ class Post {
 	}
 }
 
+class User {
 
+	meet(name, hex) {
+
+		ConfigDB.get('konaries')
+				.push({
+					name: name,
+					hex: hex
+				})
+				.write();
+
+	}
+
+	edit(name, avatar) {
+
+		ConfigDB.set('user.name', name)
+				.set('user.avatar', avatar)
+				.write();
+
+	}
+}
 
 /**
  *-----------------------
@@ -383,8 +401,11 @@ class Post {
  * @param NoticesDB export lowdb's NoticesDB
  *
  * @param Post export Post Class
+ *
+ * @param User export User Class
  */
 exports.DatHandle = DatHandle;
 exports.ConfigDB = ConfigDB;
 exports.NoticesDB = NoticesDB;
 exports.Post = Post;
+exports.User = User;

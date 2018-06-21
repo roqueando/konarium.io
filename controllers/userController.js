@@ -1,5 +1,6 @@
-const { ConfigDB, NoticesDB, Post } = require('../Handle');
+const { ConfigDB, Post, User } = require('../Handle');
 const PostHandler = new Post();
+const UserHandler = new User();
 /**
  * FormatAMPM 
  * @param  {String} date 
@@ -45,16 +46,14 @@ module.exports.meet = (req, res) => {
 
 	try {
 
-		ConfigDB.get('konaries')
-				.push({
-					name: name,
-					hex: hex
-				})
-				.write();
+		UserHandler.meet(name, hex);
 
 		res.send({
 
-			MEET_SCCS: "Connected to a Konarium"
+			MEET_SCCS: {
+				name,
+				hex
+			}
 
 		});
 
@@ -202,12 +201,9 @@ module.exports.edit = (req, res) => {
 
 	try {
 
-		const { name, from, about } = req.body;
+		const { name, avatar } = req.body;
 
-		ConfigDB.set('user.name', name)
-				.set('user.from', from)
-				.set('user.about', about)
-				.write();
+		UserHandler.edit(name, avatar);
 
 		res.send({
 
