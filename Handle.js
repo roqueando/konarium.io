@@ -92,6 +92,7 @@ NoticesDB.defaults({
  *---------------------------
  *
  * @class DatHandle
+ * 
  * @constructor src Is the path of the folder 
  *              	which will be imported
  */
@@ -113,6 +114,7 @@ class DatHandle {
 
   				dat.importFiles();
   			})
+  			
 	        dat.live;
 	        dat.joinNetwork();
 	        this.key = dat.key.toString('hex');
@@ -133,62 +135,68 @@ class DatHandle {
 
 		let konaries = ConfigDB.get('konaries').value();
 
+		filesys.readdir('./Konaries', (err, files) => {
 
+			files = files.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item));
 
-		filesys.readdirSync('./Konaries').forEach( (folder) => {
+			files.forEach( (folder) => {
 	           
-	        filesys.readdirSync('./Konaries/'+folder).filter((json) => {
+		        filesys.readdirSync('./Konaries/'+folder).filter((json) => {
 
-	            if(json.includes('.json')) {
-	   
-	                let konar = filesys.readJsonSync(`./Konaries/${folder}/notices.json`, 'utf-8');
-	                let mykonarid = NoticesDB.get('konars').map('id').value();
-	             	
-	             	for(var n in konar.notices) {
+		            if(json.includes('.json')) {
+		   
+		                let konar = filesys.readJsonSync(`./Konaries/${folder}/notices.json`, 'utf-8');
+		                let mykonarid = NoticesDB.get('konars').map('id').value();
+		             	
+		             	for(var n in konar.notices) {
 
-	             		if(mykonarid[n] == konar.notices[n].id) {
+		             		if(mykonarid[n] == konar.notices[n].id) {
 
-	             			console.log("equal");
+		             			console.log("equal");
 
-	             		}else {
+		             		}else {
 
-	             			NoticesDB.get('konars')
-	             					.push(konar.notices[n])
-	             					.write();
-	             		}
+		             			NoticesDB.get('konars')
+		             					.push(konar.notices[n])
+		             					.write();
+		             		}
 
-	             	}
-	                
-	                Watch(`./Konaries/${folder}/notices.json`, {recursive: true}, (event, name) => {
-	                	
-	                    if(event == "update") {
-	                        console.log("file: "+name+" updated");
-	                        
-	                    }
+		             	}
+		                
+		                Watch(`./Konaries/${folder}/notices.json`, {recursive: true}, (event, name) => {
+		                	
+		                    if(event == "update") {
+		                        console.log("file: "+name+" updated");
+		                        
+		                    }
 
-	                    if(event == 'remove') {
+		                    if(event == 'remove') {
 
-	                        console.log("file: "+name+" removed");
+		                        console.log("file: "+name+" removed");
 
-	                        for(let friend in konaries) {
+		                        for(let friend in konaries) {
 
-	                            
-	                            this.delivery(konaries[friend].hex, konaries[friend].name);
-	                            
-	                            console.log(konaries[friend].name); 
-	                          
-	                        }
-	                        
+		                            
+		                            this.delivery(konaries[friend].hex, konaries[friend].name);
+		                            
+		                            console.log(konaries[friend].name); 
+		                          
+		                        }
+		                        
 
-	                    }
+		                    }
 
-	                });
+		                });
 
-	            }
-	        });
-	           
-	    });
+		            }
+		        });
+		           
+		    });
 
+
+		});
+
+		
 	}
 
 
