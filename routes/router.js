@@ -69,13 +69,13 @@ router.get("/",  (req, res) => {
  * ------------------------------
  */
 
-router.post("/meet", userController.meet);
+router.post("/user/meet", userController.meet);
 
-router.post("/publish", userController.publish);
+router.post("/user/publish", userController.publish);
 
-router.post("/replyto", userController.replyto);
+router.post("/user/replyto", userController.replyto);
 
-router.put('/edit', userController.edit);
+router.put('/user/edit', userController.edit);
 
 
 /**
