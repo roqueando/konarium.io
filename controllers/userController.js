@@ -62,7 +62,7 @@ module.exports.meet = (req, res) => {
 
 		res.status(400).send({
 
-			MEET_ERROR: "Error on: "+err
+			MEET_ERROR: err.message
 
 		});
 
@@ -130,7 +130,7 @@ module.exports.publish = (req, res) => {
 
 		res.status(400).send({
 
-			PUBLISH_ERR: "Error on: " + err
+			PUBLISH_ERR: err.message
 
 		});
 
@@ -173,7 +173,7 @@ module.exports.replyto = (req, res) => {
 		if(err) throw err;
 		res.status(400).send({
 
-			REPLYTO_ERR: 'Error on: ' + err
+			REPLYTO_ERR: err.message
 
 		});
 
@@ -203,11 +203,15 @@ module.exports.edit = (req, res) => {
 
 		const { name, avatar } = req.body;
 
+
 		UserHandler.edit(name, avatar);
 
 		res.send({
 
-			EDIT_SCCS: 'User Modified'
+			EDIT_SCCS: {
+				name,
+				avatar
+			}
 		});
 
 
@@ -215,7 +219,7 @@ module.exports.edit = (req, res) => {
 
 		res.status(400).send({
 
-			EDIT_ERR: 'Error on: ' + err
+			EDIT_ERR:  err.message
 		});
 
 	}

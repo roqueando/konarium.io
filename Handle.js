@@ -73,7 +73,10 @@ const NoticesDB = LowDB(Notices);
 
 ConfigDB.defaults({
 	
-	user: {},
+	user: {
+		name: "",
+		avatar: ""
+	},
 	konaries: []
 
 }).write();
@@ -390,9 +393,31 @@ class User {
 
 	edit(name, avatar) {
 
-		ConfigDB.set('user.name', name)
-				.set('user.avatar', avatar)
-				.write();
+		
+
+			if((typeof name !== 'undefined') && (typeof avatar !== 'undefined')) {
+
+				ConfigDB.set('user.name', name)
+						.set('user.avatar', avatar)
+						.write();
+
+			}else if (typeof name !== 'undefined') {
+
+				ConfigDB.set('user.name', name)
+						.write();
+
+			} else if (typeof avatar !== 'undefined') {
+
+				ConfigDB.set('user.avatar', avatar)
+						.write();
+
+			} else {
+
+				throw new Error("Nothing to do");
+
+			}
+
+		
 
 	}
 }
